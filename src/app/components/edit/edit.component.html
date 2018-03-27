@@ -1,0 +1,45 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{ title }}
+  </div>
+  <div class="panel-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="form-group">
+        <label class="col-md-4">Dog Name</label>
+        <input type="text" class="form-control" formControlName="name" #name [(ngModel)]="dog.name"/>
+      </div>
+      <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['name'].errors.required">
+          Name is required.
+        </div>
+        <div *ngIf="angForm.controls['name'].errors.minLength || angForm.controls['name'].errors.maxLength || angForm.controls['name'].errors.pattern">
+          Name should consist of lowercase letters, with a length between 5 and 20.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Dog Age</label>
+        <input type="text" class="form-control" formControlName="age" #age [(ngModel)]="dog.age"/>
+      </div>
+      <div *ngIf="angForm.controls['age'].invalid && (angForm.controls['age'].dirty || angForm.controls['age'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['age'].errors.required">
+          Age is required.
+        </div>
+        <div *ngIf="angForm.controls['age'].errors.min || angForm.controls['age'].errors.max">
+          Age should be a number between 0 and 30 inclusively.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Dog Race</label>
+        <input type="text" class="form-control" formControlName="race" #race [(ngModel)]="dog.race"/>
+      </div>
+      <div *ngIf="angForm.controls['race'].invalid && (angForm.controls['race'].dirty || angForm.controls['race'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['race'].errors.required">
+          Race is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <button (click)="updateDog(name.value, age.value, race.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
