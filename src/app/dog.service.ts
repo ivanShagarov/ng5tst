@@ -11,17 +11,29 @@ export class DogService {
 
   constructor(private http: HttpClient) {}
 
+  getFormObj() {
+    return {
+      name: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('[a-z]{5,20}')]
+      )],
+      age: ['', Validators.compose([Validators.required, Validators.min(1), Validators.max(30)])],
+      race: ['', Validators.required],
+    };
+  }
+
   addDog(name, age, race) {
     const obj = {
       name: name,
       age: age,
       race: race,
     };
-    this
+    return this
       .http
       .post(this.uri, obj)
-      .subscribe(res =>
-          console.log('Done'));
+      .map(res => {
+        return res;
+      });
   }
 
   getDog(id?) {
@@ -40,10 +52,12 @@ export class DogService {
       age: age,
       race: race,
     };
-    this
+    return this
       .http
       .put(this.uri + id, obj)
-      .subscribe(res => console.log('Done'));
+      .map(res => {
+        return res;
+      });
   }
 
   deleteDog(id) {

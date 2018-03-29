@@ -1,10 +1,22 @@
 {
   "dogs": [
     {
-      "name": "sfd",
-      "age": "32",
-      "race": "sfd",
+      "name": "testone",
+      "age": "21",
+      "race": "doberman",
+      "id": 1
+    },
+    {
+      "name": "testtwo",
+      "age": "18",
+      "race": "bulldog",
       "id": 2
+    },
+    {
+      "name": "mnmnmn",
+      "age": "4",
+      "race": "pitbul",
+      "id": 3
     }
   ]
 }

@@ -12,7 +12,7 @@
           <div *ngIf="angForm.controls['name'].errors?.required">
             Name is required.
           </div>
-          <div *ngIf="angForm.controls['name'].errors?.minLength || angForm.controls['name'].errors?.maxLength || angForm.controls['name'].errors?.pattern">
+          <div *ngIf="angForm.controls['name'].errors?.minlength || angForm.controls['name'].errors?.maxlength || angForm.controls['name'].errors?.pattern">
             Name should consist of lowercase letters, with a length between 5 and 20.
           </div>
         </div>

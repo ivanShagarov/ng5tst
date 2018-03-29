@@ -8,27 +8,26 @@ import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
+
 export class EditComponent implements OnInit {
 
   dog: any;
   angForm: FormGroup;
   title = 'Edit Dog';
+
   constructor(private route: ActivatedRoute, private router: Router, private service: DogService, private fb: FormBuilder) {
     this.createForm();
-   }
+  }
 
   createForm() {
-    this.angForm = this.fb.group({
-      name: ['', Validators.required, Validators.minLength(5), Validators.maxLength(20), Validators.pattern('[a-z]') ],
-      age: ['', Validators.required, Validators.min(1), Validators.max(30) ],
-      race: ['', Validators.required ],
-   });
+    this.angForm = this.fb.group(this.service.getFormObj());
   }
 
   updateDog(name, age, race) {
     this.route.params.subscribe(params => {
-      this.service.updateDog(name, age, race, params['id']);
-      this.router.navigate(['dogs']);
+      this.service.updateDog(name, age, race, params['id']).subscribe(res => {
+        this.router.navigate(['dogs']);
+      });
     });
   }
 

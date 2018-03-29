@@ -1,5 +1,6 @@
 import { DogService } from './../../dog.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Dog } from '../../Dog';
@@ -13,21 +14,23 @@ export class DogsComponent implements OnInit {
 
   dogs: any;
 
-  constructor(private http: HttpClient, private service: DogService) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private service: DogService) {}
 
   ngOnInit() {
-    this.getDogs();
-  }
-
-  getDogs() {
-    this.service.getDog().subscribe(res => {
-      this.dogs = res;
+    this.route.url.subscribe(url => {
+      this.getDogs();
     });
   }
 
   deleteDog(id) {
     this.service.deleteDog(id).subscribe(res => {
-      console.log('Deleted');
+      this.getDogs();
+    });
+  }
+
+  getDogs() {
+    this.service.getDog().subscribe(res => {
+      this.dogs = res;
     });
   }
 }
